@@ -1,44 +1,27 @@
-package com.example.demo.entity;
+package com.example.demo.service.dtos;
 
-import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 
-import java.util.ArrayList;
 import java.util.List;
 
-@Entity
-public class Student {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
+public class StudentDTO {
+    @NotBlank(message = "Name is required")
     private String name;
-
+    @NotBlank(message = "Surname is required")
     private String surname;
-
-    @Column(unique = true)
+    @NotBlank(message = "Student number is required")
     private String stdNumber;
 
-    @OneToMany(mappedBy = "student", cascade = CascadeType.ALL)
-    private List<Grade> grades = new ArrayList<>();
+    private List<GradeDTO> grades;
 
-    public Student(Long id, String name, String surname, String stdNumber, List<Grade> grades) {
-        this.id = id;
+    public StudentDTO(String name, String surname, String stdNumber, List<GradeDTO> grades) {
         this.name = name;
         this.surname = surname;
         this.stdNumber = stdNumber;
         this.grades = grades;
     }
-    public Student(){
+    public StudentDTO(){
 
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getName() {
@@ -65,11 +48,11 @@ public class Student {
         this.stdNumber = stdNumber;
     }
 
-    public List<Grade> getGrades() {
+    public List<GradeDTO> getGrades() {
         return grades;
     }
 
-    public void setGrades(List<Grade> grades) {
+    public void setGrades(List<GradeDTO> grades) {
         this.grades = grades;
     }
 }
